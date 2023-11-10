@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:news_app/models/top_news_headlines_model.dart';
@@ -29,6 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
            icon: Image.asset('images/category_icon.png'),)
       ),
       body: ListView(
+        
         children: [
           SizedBox(height: 500,
           child: FutureBuilder<TopNewsHeadlinesModel>(
@@ -42,8 +44,39 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
 
               }
-              else{
-               return Container();
+              else if (snapshot.hasError || snapshot.data == null) {
+      return Center(
+        child: Text("Error loading data : ${snapshot.error} "),
+      );
+              }
+              else{ 
+                // print(snapshot.data);
+               return ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: snapshot.data!.articles!.length,  //saray articles ki length
+                itemBuilder: (context, index){
+                  //
+          //           // Check for null values before accessing properties
+          // String imageUrl = snapshot.data!.articles![index].urlToImage ?? "";
+
+                  return SizedBox(
+                child: Stack(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal:10.0),
+                      child: SizedBox(
+                        child: CachedNetworkImage(imageUrl: snapshot.data!.articles![index].urlToImage.toString(),
+                        // fit: BoxFit.contain,
+                        height: 300, width: 300,
+                        placeholder: (context, url) => Container(child: spinkit2,),
+                        errorWidget: (context, url, error) => const Icon(Icons.error,color: Colors.red,),),
+                      ),
+                    )
+                  ],
+                ),
+               );
+
+                });
 
               }
                
@@ -57,3 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+const spinkit2 =  SpinKitFadingCircle(
+  color:Colors.amber, size: 30,
+);
+  
