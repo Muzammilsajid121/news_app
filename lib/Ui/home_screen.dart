@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:intl/intl.dart';
 import 'package:news_app/models/top_news_headlines_model.dart';
 import 'package:news_app/view_model/news_view_model.dart';
 
@@ -17,6 +18,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // final width = MediaQuery.sizeOf(context).width*1;
   // final height = MediaQuery.sizeOf(context).height*1;
+
+  final format = DateFormat('MMMM dd, yyyy');
 
   @override
   Widget build(BuildContext context) {
@@ -55,23 +58,85 @@ class _HomeScreenState extends State<HomeScreen> {
                 scrollDirection: Axis.horizontal,
                 itemCount: snapshot.data!.articles!.length,  //saray articles ki length
                 itemBuilder: (context, index){
+                 
+                  //date time change karwanay k liay aur show karnay k liayy
+                  DateTime dateTime = DateTime.parse(snapshot.data!.articles![index].publishedAt.toString());
                   //
-          //           // Check for null values before accessing properties
-          // String imageUrl = snapshot.data!.articles![index].urlToImage ?? "";
 
                   return SizedBox(
+                    
                 child: Stack(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal:10.0),
-                      child: SizedBox(
+                    Container(
+                      height: 480, width: 320,
+                      // padding: EdgeInsets.symmetric(horizontal: 10),
+                      padding: EdgeInsets.all(10),
+                      //
+                      //wrap cachednet with clipRReact to make border circular
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
                         child: CachedNetworkImage(imageUrl: snapshot.data!.articles![index].urlToImage.toString(),
-                        // fit: BoxFit.contain,
-                        height: 300, width: 300,
+                        fit: BoxFit.cover,
+                        
                         placeholder: (context, url) => Container(child: spinkit2,),
                         errorWidget: (context, url, error) => const Icon(Icons.error,color: Colors.red,),),
                       ),
-                    )
+                      
+                    ),
+                    //
+                    //
+                    Positioned(
+                      bottom: 40, left: 10, right: 10,
+                      child: Card(
+                        // elevation: 5,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        //
+
+                        child: Container(
+                          padding: EdgeInsets.all(8),
+                          // height: 90,width: 300,
+                          height: 130,
+                          alignment: Alignment.bottomCenter,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 300,
+                                child: Text(snapshot.data!.articles![index].title.toString(),
+                                style: Theme.of(context).textTheme.bodyMedium,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              //Source and date time
+                              Spacer(),
+                              Container(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    //source
+                                     Text(snapshot.data!.articles![index].source!.name.toString(),
+                                     style: Theme.of(context).textTheme.bodySmall,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,),
+                                //date time
+                                 Text(format.format(dateTime),
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,),
+                                    
+                                  ],
+                                ),
+                              )
+                    
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
                );

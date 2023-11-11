@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         textTheme: TextTheme(
             //Body Small
             bodySmall:
-                GoogleFonts.montserrat(fontSize: 14, color: Color(0xffABB4BD)),
+                GoogleFonts.montserrat(fontSize: 14, color: Color.fromARGB(255, 2, 2, 2)),
             //Body Medium
             bodyMedium: GoogleFonts.montserrat(
                 fontSize: 16, color: Colors.black, fontWeight: FontWeight.w700),
