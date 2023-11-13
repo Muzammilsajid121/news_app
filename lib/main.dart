@@ -13,12 +13,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
+        
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
         //
-          scaffoldBackgroundColor:  Color.fromARGB(255, 189, 188, 188),
+          scaffoldBackgroundColor:  Color.fromARGB(255, 236, 236, 236),
        //
         //TEXT THEMES
         textTheme: TextTheme(
@@ -30,7 +32,7 @@ class MyApp extends StatelessWidget {
                 fontSize: 16, color: Colors.black, fontWeight: FontWeight.w700),
             //
             //Body Large; choosen by theme
-            bodyLarge: GoogleFonts.roboto(fontSize: 17, color: Colors.black),
+            bodyLarge: GoogleFonts.dmSans(fontSize: 20,  fontWeight: FontWeight.w700, color: Colors.black),
             //
             titleMedium: GoogleFonts.dmSans(fontSize: 23, color: Colors.black),
 

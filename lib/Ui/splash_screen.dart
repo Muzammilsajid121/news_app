@@ -20,25 +20,34 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 5), SwitchToHomeScreen);
+    Future.delayed(const Duration(seconds: 1000), SwitchToHomeScreen);
     super.initState();
   }
-  //
+  
   @override
   Widget build(BuildContext context) {
+
+
+final height = MediaQuery.sizeOf(context).height *1;
+final width = MediaQuery.sizeOf(context).width *1;
+
     return  Scaffold(
+
 
       body: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
         children: [
 
-          Image.asset("images/splash_pic.jpg" , fit: BoxFit.contain, ),
-          const SizedBox(height: 8,),
+          Image.asset("images/1.png" ,fit: BoxFit.cover, height: height*0.5, width: width*0.99, ),
+
+           SizedBox(height: height*0.04,),
 
          const  Text("Top Headlines"),
 
-         SpinKitChasingDots(color: Colors.blue , size: 45,)
+          SizedBox(height: height*0.02),
+
+       const   SpinKitPouringHourGlass(color: Colors.orange , size: 40,)
 
         ],
 

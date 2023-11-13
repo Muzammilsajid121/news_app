@@ -12,7 +12,11 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
+  enum FilterList {bbcNews, aryNews, independent, reuters, cnn, bloomberg, alJazeera}  //for popup in app bar
+
 class _HomeScreenState extends State<HomeScreen> {
+
+
 
   newsViewModel NewsViewModel = newsViewModel();  //initilize model which we created in news_view_model.dart
 
@@ -20,28 +24,89 @@ class _HomeScreenState extends State<HomeScreen> {
   // final height = MediaQuery.sizeOf(context).height*1;
 
   final format = DateFormat('MMMM dd, yyyy');
+  FilterList? selectedMenu; 
+
+  String name = "bbc-news";  //name as same as in api documentry
+
+
 
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: AppBar(
-        title: Text("NEWS"),
+        title: Text("NEWS",style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.white),),
+        centerTitle: true,
         leading: IconButton(
           onPressed: (){
 
           },
-           icon: Image.asset('images/category_icon.png'),)
+           icon: Image.asset('images/category_icon.png'),),
+        
+        actions: [
+          PopupMenuButton<FilterList>(
+            initialValue: selectedMenu,
+            icon:const Icon(Icons.more_vert) ,
+            //
+            onSelected: (FilterList item){
+              if(FilterList.bbcNews.name == item.name){
+                name ='bbc-news';
+              }
+              if(FilterList.aryNews.name == item.name){
+                name ='ary-news';
+              }
+              if(FilterList.alJazeera.name == item.name){
+                name ='al-jazeera-english';
+              }
+              if(FilterList.bloomberg.name == item.name){
+                name ='bloomberg';
+              }
+              if(FilterList.cnn.name == item.name){
+                name ='cnn';
+              }
+              print('Selected News Source: $name');
+              setState(() {
+                selectedMenu=item;
+              });
+            },
+            itemBuilder:(BuildContext context) => <PopupMenuEntry<FilterList>> [
+             const PopupMenuItem<FilterList>(
+                value: FilterList.bbcNews,
+                child: Text('BBC News') ,
+              ),
+              //ARY
+              const  PopupMenuItem<FilterList>(
+                value: FilterList.aryNews,
+                child: Text('ARY News') ,
+              ),
+              //Al-Jazeera
+             const   PopupMenuItem<FilterList>(
+                value: FilterList.alJazeera,
+                child: Text('Al Jazeera News') ,
+              ),
+               //Al-Jazeera
+              const  PopupMenuItem<FilterList>(
+                value: FilterList.bloomberg,
+                child: Text('Bloomberg News') ,  //this is name that showing in popupmenu
+              ),
+               //Cnn
+             const  PopupMenuItem<FilterList>(
+                value: FilterList.cnn,
+                child: Text('Cnn News') ,  
+              ),
+
+            ])
+        ],
       ),
       body: ListView(
         
         children: [
           SizedBox(height: 500,
           child: FutureBuilder<TopNewsHeadlinesModel>(
-            future: NewsViewModel.fetchNewsChannelHeadlinesApi(),
+            future: NewsViewModel.fetchNewsChannelHeadlinesApi(name),
              builder: ( (context, snapshot) {
               //agar wait horha ho to spinkit dikhaoo
               if(snapshot.connectionState==ConnectionState.waiting){
-                return Center(
+                return const Center(
                   child: SpinKitCircle(color: Colors.blue, size: 30,),
 
                 );
@@ -70,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Container(
                       height: 480, width: 320,
                       // padding: EdgeInsets.symmetric(horizontal: 10),
-                      padding: EdgeInsets.all(10),
+                      padding:const EdgeInsets.all(10),
                       //
                       //wrap cachednet with clipRReact to make border circular
                       child: ClipRRect(
@@ -95,7 +160,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         //
 
                         child: Container(
-                          padding: EdgeInsets.all(8),
+                          padding:const EdgeInsets.all(8),
                           // height: 90,width: 300,
                           height: 130,
                           alignment: Alignment.bottomCenter,
@@ -112,7 +177,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                               //Source and date time
-                              Spacer(),
+                           const   Spacer(),
                               Container(
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

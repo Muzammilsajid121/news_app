@@ -6,9 +6,10 @@ import 'package:news_app/models/top_news_headlines_model.dart';
 
 class NewsRepositry{
 
-  Future<TopNewsHeadlinesModel> fetchNewsChannelHeadlinesApi() async{
-    // String url = 'https://newsapi.org/v2/top-headlines?country=cn&apiKey=04011b4b4aba457eaf8d0ad2d393c822';
-    String url = 'https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=04011b4b4aba457eaf8d0ad2d393c822';
+  Future<TopNewsHeadlinesModel> fetchNewsChannelHeadlinesApi(String channelName) async{
+  
+ //  String url = 'https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=04011b4b4aba457eaf8d0ad2d393c822';
+     String url = 'https://newsapi.org/v2/top-headlines?sources=${channelName}&apiKey=04011b4b4aba457eaf8d0ad2d393c822';
 
     final response = await http.get(Uri.parse(url));
 
@@ -26,3 +27,7 @@ class NewsRepositry{
 
   }
 }
+
+
+
+
