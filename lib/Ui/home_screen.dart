@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/intl.dart';
+import 'package:news_app/Ui/categories_screen.dart';
 import 'package:news_app/models/top_news_headlines_model.dart';
 import 'package:news_app/view_model/news_view_model.dart';
 
@@ -20,8 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   newsViewModel NewsViewModel = newsViewModel();  //initilize model which we created in news_view_model.dart
 
-  // final width = MediaQuery.sizeOf(context).width*1;
-  // final height = MediaQuery.sizeOf(context).height*1;
+ 
 
   final format = DateFormat('MMMM dd, yyyy');
   FilterList? selectedMenu; 
@@ -32,12 +32,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+  //    final width = MediaQuery.sizeOf(context).width*1;
+  // final height = MediaQuery.sizeOf(context).height*1;
     return  Scaffold(
       appBar: AppBar(
         title: Text("NEWS",style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.white),),
         centerTitle: true,
         leading: IconButton(
           onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => CategoryScreen(),));
 
           },
            icon: Image.asset('images/category_icon.png'),),
