@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/intl.dart';
 import 'package:news_app/Ui/categories_screen.dart';
+import 'package:news_app/models/categories_news_model.dart';
 import 'package:news_app/models/top_news_headlines_model.dart';
 import 'package:news_app/view_model/news_view_model.dart';
 
@@ -32,8 +33,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-  //    final width = MediaQuery.sizeOf(context).width*1;
-  // final height = MediaQuery.sizeOf(context).height*1;
+     final width = MediaQuery.sizeOf(context).width*1;
+  final height = MediaQuery.sizeOf(context).height*1;
     return  Scaffold(
       appBar: AppBar(
         title: Text("NEWS",style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.white),),
@@ -103,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: ListView(
         
         children: [
-          SizedBox(height: 500,
+          SizedBox(height: 500,           
           child: FutureBuilder<TopNewsHeadlinesModel>(
             future: NewsViewModel.fetchNewsChannelHeadlinesApi(name),
              builder: ( (context, snapshot) {
@@ -217,7 +218,101 @@ class _HomeScreenState extends State<HomeScreen> {
              )
              ),
           
-          )
+          ),
+        
+        //futrebuilder code from categories screen
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: FutureBuilder<CategoriesNewsModel>(
+                           future: NewsViewModel.fetchNewscategoriesApi('General'),
+                 builder: ( (context, snapshot) {
+                  //agar wait horha ho to spinkit dikhaoo
+                  if(snapshot.connectionState==ConnectionState.waiting){
+                    return const Center(
+                      child: SpinKitCircle(color: Colors.blue, size: 30,),
+               
+                    );
+               
+                  }
+                  else if (snapshot.hasError || snapshot.data == null) {
+                     return Center(
+                       child: Text("Error loading data : ${snapshot.error} "),
+                     );
+                  }
+                  else{ 
+                    // print(snapshot.data);
+                   return ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    itemCount: snapshot.data!.articles!.length,  //saray articles ki length
+                    itemBuilder: (context, index){
+                     
+                      //date time change karwanay k liay aur show karnay k liayy
+                      DateTime dateTime = DateTime.parse(snapshot.data!.articles![index].publishedAt.toString());
+                      //
+               
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: Row(
+                          children: [
+                            ClipRRect(
+          
+                            borderRadius: BorderRadius.circular(15),
+                            child: CachedNetworkImage(imageUrl: snapshot.data!.articles![index].urlToImage.toString(),
+                            fit: BoxFit.cover,
+                            height:height*.28 , width: width*.4,
+                            
+                            placeholder: (context, url) => Container(child: spinkit2,),
+                            errorWidget: (context, url, error) => const Icon(Icons.error,color: Colors.red,),),
+                          ),
+                          //
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Container(
+                                
+                                height: height*.3,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(snapshot.data!.articles![index].title.toString(),
+                                    maxLines: 3,
+                                    style: Theme.of(context).textTheme.bodyMedium,),
+                                    //
+                                        Text(snapshot.data!.articles![index].source!.name.toString(),
+                                   
+                                    style: Theme.of(context).textTheme.bodySmall,),
+                                    //
+                                    // SizedBox(width: width*.03,),
+                                      Text(format.format(dateTime),
+                                   
+                                    style: Theme.of(context).textTheme.bodySmall,),
+                            
+                                    // Spacer(),
+                                    // SizedBox(height: height*.02,),
+                                    // Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    //   children: [
+                                      
+                                    //   ],
+                                    // )
+                                  ],
+                                ),
+                              ),
+                            ))
+                          ],
+                          
+                        ),
+                      );
+               
+                    });
+               
+                  }
+                   
+                 }
+                 )
+                 ),
+          ),
         ],
       ),
     );
