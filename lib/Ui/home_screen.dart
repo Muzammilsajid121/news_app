@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/intl.dart';
 import 'package:news_app/Ui/categories_screen.dart';
+import 'package:news_app/Ui/news_detail_screen.dart';
 import 'package:news_app/models/categories_news_model.dart';
 import 'package:news_app/models/top_news_headlines_model.dart';
 import 'package:news_app/view_model/news_view_model.dart';
@@ -131,84 +132,99 @@ class _HomeScreenState extends State<HomeScreen> {
                   //date time change karwanay k liay aur show karnay k liayy
                   DateTime dateTime = DateTime.parse(snapshot.data!.articles![index].publishedAt.toString());
                   //
+//wrap this sizedbox with INkwell to show funn news details
 
-                  return SizedBox(
-                    
-                child: Stack(
-                  children: [
-                    Container(
-                      height: 480, width: 320,
-                      // padding: EdgeInsets.symmetric(horizontal: 10),
-                      padding:const EdgeInsets.all(10),
-                      //
-                      //wrap cachednet with clipRReact to make border circular
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: CachedNetworkImage(imageUrl: snapshot.data!.articles![index].urlToImage.toString(),
-                        fit: BoxFit.cover,
-                        
-                        placeholder: (context, url) => Container(child: spinkit2,),
-                        errorWidget: (context, url, error) => const Icon(Icons.error,color: Colors.red,),),
-                      ),
+                  return InkWell(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                       NewsDatailScreen(
+                        newsImage: snapshot.data!.articles![index].urlToImage.toString(),
+                         newsTitle: snapshot.data!.articles![index].title.toString(),
+                         date: snapshot.data!.articles![index].publishedAt.toString(), 
+                         author: snapshot.data!.articles![index].author.toString(),
+                          description: snapshot.data!.articles![index].description.toString(), 
+                          content: snapshot.data!.articles![index].content.toString(), 
+                          source: snapshot.data!.articles![index].source!.name.toString()
+                          )));
+                    },
+                    child: SizedBox(
                       
-                    ),
-                    //
-                    //
-                    Positioned(
-                      bottom: 40, left: 10, right: 10,
-                      child: Card(
-                        // elevation: 5,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
+                                  child: Stack(
+                    children: [
+                      Container(
+                        height: 480, width: 320,
+                        // padding: EdgeInsets.symmetric(horizontal: 10),
+                        padding:const EdgeInsets.all(10),
                         //
-
-                        child: Container(
-                          padding:const EdgeInsets.all(8),
-                          // height: 90,width: 300,
-                          height: 130,
-                          alignment: Alignment.bottomCenter,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: 300,
-                                child: Text(snapshot.data!.articles![index].title.toString(),
-                                style: Theme.of(context).textTheme.bodyMedium,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
+                        //wrap cachednet with clipRReact to make border circular
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+                          child: CachedNetworkImage(imageUrl: snapshot.data!.articles![index].urlToImage.toString(),
+                          fit: BoxFit.cover,
+                          
+                          placeholder: (context, url) => Container(child: spinkit2,),
+                          errorWidget: (context, url, error) => const Icon(Icons.error,color: Colors.red,),),
+                        ),
+                        
+                      ),
+                      //
+                      //
+                      Positioned(
+                        bottom: 40, left: 10, right: 10,
+                        child: Card(
+                          // elevation: 5,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          //
+                  
+                          child: Container(
+                            padding:const EdgeInsets.all(8),
+                            // height: 90,width: 300,
+                            height: 130,
+                            alignment: Alignment.bottomCenter,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: 300,
+                                  child: Text(snapshot.data!.articles![index].title.toString(),
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  ),
                                 ),
-                              ),
-                              //Source and date time
-                           const   Spacer(),
-                              Container(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    //source
-                                     Text(snapshot.data!.articles![index].source!.name.toString(),
-                                     style: Theme.of(context).textTheme.bodySmall,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,),
-                                //date time
-                                 Text(format.format(dateTime),
-                                  style: Theme.of(context).textTheme.bodySmall,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,),
-                                    
-                                  ],
-                                ),
-                              )
-                    
-                            ],
+                                //Source and date time
+                             const   Spacer(),
+                                Container(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      //source
+                                       Text(snapshot.data!.articles![index].source!.name.toString(),
+                                       style: Theme.of(context).textTheme.bodySmall,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,),
+                                  //date time
+                                   Text(format.format(dateTime),
+                                    style: Theme.of(context).textTheme.bodySmall,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,),
+                                      
+                                    ],
+                                  ),
+                                )
+                      
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-               );
+                    ],
+                                  ),
+                                 ),
+                  );
 
                 });
 

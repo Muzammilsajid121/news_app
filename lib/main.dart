@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app/Ui/categories_screen.dart';
+import 'package:news_app/Ui/home_screen.dart';
 import 'package:news_app/Ui/splash_screen.dart';
 import 'package:news_app/extra_screen.dart';
 
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
             backgroundColor: Color.fromARGB(255, 44, 62, 92), foregroundColor: Colors.white),
       ),
       //
-      home: const SplashScreen(),
+      home: const HomeScreen(),
     );
   }
 }
