@@ -29,13 +29,16 @@ class MyApp extends StatelessWidget {
         textTheme: TextTheme(
             //Body Small
             bodySmall:
-                GoogleFonts.montserrat(fontSize: 14, color: Color.fromARGB(255, 2, 2, 2)),
+                GoogleFonts.montserrat(fontSize: 11,fontWeight: FontWeight.w600, color: Colors.black),
+                //
+                displaySmall:
+                 GoogleFonts.montserrat(fontSize: 14,fontWeight: FontWeight.w700, color: Colors.black),
             //Body Medium
             bodyMedium: GoogleFonts.montserrat(
                 fontSize: 16, color: Colors.black, fontWeight: FontWeight.w700),
             //
             //Body Large; choosen by theme
-            bodyLarge: GoogleFonts.dmSans(fontSize: 20,  fontWeight: FontWeight.w700, color: Colors.black),
+            bodyLarge: GoogleFonts.roboto(fontSize: 19,  fontWeight: FontWeight.w700, color: Colors.black),
             //
             titleMedium: GoogleFonts.dmSans(fontSize: 23, color: Colors.black),
 
@@ -45,7 +48,7 @@ class MyApp extends StatelessWidget {
             backgroundColor: Color.fromARGB(255, 44, 62, 92), foregroundColor: Colors.white),
       ),
       //
-      home: const HomeScreen(),
+      home: const SplashScreen(),
     );
   }
 }

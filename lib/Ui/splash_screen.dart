@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:lottie/lottie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:news_app/Ui/home_screen.dart';
@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 3), SwitchToHomeScreen);
+    Future.delayed(const Duration(seconds: 32), SwitchToHomeScreen);
     super.initState();
   }
   
@@ -39,15 +39,21 @@ final width = MediaQuery.sizeOf(context).width *1;
           mainAxisAlignment: MainAxisAlignment.center,
         children: [
 
-          Image.asset("images/1.png" ,fit: BoxFit.cover, height: height*0.5, width: width*0.99, ),
+          // Image.asset("images/1.png" ,fit: BoxFit.cover, height: height*0.5, width: width*0.99, ),
 
            SizedBox(height: height*0.04,),
 
-         const  Text("Top Headlines"),
+         
 
           SizedBox(height: height*0.02),
 
-       const   SpinKitPouringHourGlass(color: Colors.orange , size: 40,)
+       
+       Lottie.asset('images/newsani.json', height: 300, width: 280),
+
+       const  Text("News App"),
+
+       const   SpinKitPouringHourGlass(color: Colors.orange , size: 40,),
+       
 
         ],
 

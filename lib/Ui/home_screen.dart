@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Navigator.push(context, MaterialPageRoute(builder: (context) => CategoryScreen(),));
 
           },
-           icon: Image.asset('images/category_icon.png'),),
+           icon: Image.asset('images/category.png'),),
         
         actions: [
           PopupMenuButton<FilterList>(
@@ -204,12 +204,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                       //source
                                        Text(snapshot.data!.articles![index].source!.name.toString(),
                                        style: Theme.of(context).textTheme.bodySmall,
-                                  maxLines: 2,
+                                  maxLines: 1,
                                   overflow: TextOverflow.ellipsis,),
                                   //date time
                                    Text(format.format(dateTime),
                                     style: Theme.of(context).textTheme.bodySmall,
-                                  maxLines: 2,
+                                  maxLines: 1,
                                   overflow: TextOverflow.ellipsis,),
                                       
                                     ],
@@ -299,10 +299,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         Text(snapshot.data!.articles![index].source!.name.toString(),
                                    
                                     style: Theme.of(context).textTheme.bodySmall,),
-                                    //
-                                    // SizedBox(width: width*.03,),
+                                    
                                       Text(format.format(dateTime),
-                                   
                                     style: Theme.of(context).textTheme.bodySmall,),
                             
                                     // Spacer(),
