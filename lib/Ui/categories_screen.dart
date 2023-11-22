@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/intl.dart';
 import 'package:news_app/Ui/home_screen.dart';
+import 'package:news_app/Ui/news_detail_screen.dart';
 import 'package:news_app/models/categories_news_model.dart';
 import 'package:news_app/view_model/news_view_model.dart';
 
@@ -30,7 +31,10 @@ List<String> categoriesList = [
        final width = MediaQuery.sizeOf(context).width*1;
   final height = MediaQuery.sizeOf(context).height*1;
     return  Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text('CATEGORIES',style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: Colors.white),),
+        centerTitle: true,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -57,7 +61,7 @@ List<String> categoriesList = [
                   
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                          child: Text(categoriesList[index].toString(),style: Theme.of(context).textTheme.bodyMedium,),
+                          child:  Text(categoriesList[index].toString(),style: Theme.of(context).textTheme.bodyMedium,),
                         ),
                         decoration: BoxDecoration(
                           color:   categoryName==categoriesList[index]? Colors.blue : Colors.grey,
@@ -102,55 +106,73 @@ List<String> categoriesList = [
              
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: Row(
-                        children: [
-                          ClipRRect(
 
-                          borderRadius: BorderRadius.circular(15),
-                          child: CachedNetworkImage(imageUrl: snapshot.data!.articles![index].urlToImage.toString(),
-                          fit: BoxFit.cover,
-                          height:height*.28 , width: width*.4,
+                      //purpose to show the datail using INKWELL
+                      child: InkWell(
+                        onTap: () {
+
+                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                       NewsDatailScreen(
+                        newsImage: snapshot.data!.articles![index].urlToImage.toString(),
+                         newsTitle: snapshot.data!.articles![index].title.toString(),
+                         date: snapshot.data!.articles![index].publishedAt.toString(), 
+                         author: snapshot.data!.articles![index].author.toString(),
+                          description: snapshot.data!.articles![index].description.toString(), 
+                          content: snapshot.data!.articles![index].content.toString(), 
+                          source: snapshot.data!.articles![index].source!.name.toString()
+                          )));
                           
-                          placeholder: (context, url) => Container(child: spinkit2,),
-                          errorWidget: (context, url, error) => const Icon(Icons.error,color: Colors.red,),),
-                        ),
-                        //
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Container(
-                              
-                              height: height*.3,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(snapshot.data!.articles![index].title.toString(),
-                                  maxLines: 3,
-                                  style: Theme.of(context).textTheme.bodyMedium,),
-                                  //
-                                      Text(snapshot.data!.articles![index].source!.name.toString(),
-                                 
-                                  style: Theme.of(context).textTheme.bodySmall,),
-                                  //
-                                  // SizedBox(width: width*.03,),
-                                    Text(format.format(dateTime),
-                                 
-                                  style: Theme.of(context).textTheme.bodySmall,),
-                          
-                                  // Spacer(),
-                                  // SizedBox(height: height*.02,),
-                                  // Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  //   children: [
-                                    
-                                  //   ],
-                                  // )
-                                ],
+                        },
+                        child: Row(
+                          children: [
+                            ClipRRect(
+                      
+                            borderRadius: BorderRadius.circular(15),
+                            child: CachedNetworkImage(imageUrl: snapshot.data!.articles![index].urlToImage.toString(),
+                            fit: BoxFit.cover,
+                            height:height*.28 , width: width*.4,
+                            
+                            placeholder: (context, url) => Container(child: spinkit2,),
+                            errorWidget: (context, url, error) => const Icon(Icons.error,color: Colors.red,),),
+                          ),
+                          //
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: SizedBox(
+                                
+                                height: height*.3,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(snapshot.data!.articles![index].title.toString(),
+                                    maxLines: 3,
+                                    style: Theme.of(context).textTheme.bodyMedium,),
+                                    //
+                                        Text(snapshot.data!.articles![index].source!.name.toString(),
+                                   
+                                    style: Theme.of(context).textTheme.bodySmall,),
+                                    //
+                                    // SizedBox(width: width*.03,),
+                                      Text(format.format(dateTime),
+                                   
+                                    style: Theme.of(context).textTheme.bodySmall,),
+                            
+                                    // Spacer(),
+                                    // SizedBox(height: height*.02,),
+                                    // Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    //   children: [
+                                      
+                                    //   ],
+                                    // )
+                                  ],
+                                ),
                               ),
-                            ),
-                          ))
-                        ],
-                        
+                            ))
+                          ],
+                          
+                        ),
                       ),
                     );
              

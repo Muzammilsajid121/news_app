@@ -13,14 +13,14 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   //splash
- void SwitchToHomeScreen() {
+ void switchToHomeScreen() {
     Navigator.pushReplacement(   //push replacement means you cant go back to this screen
-        context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        context, MaterialPageRoute(builder: (context) =>const  HomeScreen()));
   }
 
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 32), SwitchToHomeScreen);
+    Future.delayed(const Duration(seconds: 3), switchToHomeScreen);
     super.initState();
   }
   
@@ -32,32 +32,21 @@ final height = MediaQuery.sizeOf(context).height *1;
 final width = MediaQuery.sizeOf(context).width *1;
 
     return  Scaffold(
+     
 
 
-      body: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+      children: [
 
-          // Image.asset("images/1.png" ,fit: BoxFit.cover, height: height*0.5, width: width*0.99, ),
+       Lottie.asset('images/newsani.json', height: height*.4, width: width*.5),
+       Text("News App", style: Theme.of(context).textTheme.titleMedium!.copyWith(fontSize: 40),),
 
-           SizedBox(height: height*0.04,),
+       SizedBox(height: height*0.01),
+       const   SpinKitFadingCube(color: Colors.orange , size: 35,),
+      
+      ],
 
-         
-
-          SizedBox(height: height*0.02),
-
-       
-       Lottie.asset('images/newsani.json', height: 300, width: 280),
-
-       const  Text("News App"),
-
-       const   SpinKitPouringHourGlass(color: Colors.orange , size: 40,),
-       
-
-        ],
-
-        ),
       ),
     );
   }

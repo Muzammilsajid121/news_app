@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/intl.dart';
@@ -38,11 +39,11 @@ class _HomeScreenState extends State<HomeScreen> {
   final height = MediaQuery.sizeOf(context).height*1;
     return  Scaffold(
       appBar: AppBar(
-        title: Text("NEWS",style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.white),),
+        title: Text('TOP NEWS',style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: Colors.white),),
         centerTitle: true,
         leading: IconButton(
           onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => CategoryScreen(),));
+            Navigator.push(context, MaterialPageRoute(builder: (context) =>const  CategoryScreen(),));
 
           },
            icon: Image.asset('images/category.png'),),
@@ -68,7 +69,9 @@ class _HomeScreenState extends State<HomeScreen> {
               if(FilterList.cnn.name == item.name){
                 name ='cnn';
               }
-              print('Selected News Source: $name');
+              if (kDebugMode) {
+                print('Selected News Source: $name');
+              }
               setState(() {
                 selectedMenu=item;
               });
@@ -187,7 +190,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Container(
+                                 SizedBox(
                                   width: 300,
                                   child: Text(snapshot.data!.articles![index].title.toString(),
                                   style: Theme.of(context).textTheme.bodyMedium,
@@ -197,7 +200,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 //Source and date time
                              const   Spacer(),
-                                Container(
+                                SizedBox(
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
@@ -269,53 +272,71 @@ class _HomeScreenState extends State<HomeScreen> {
                
                       return Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: Row(
-                          children: [
-                            ClipRRect(
-          
-                            borderRadius: BorderRadius.circular(15),
-                            child: CachedNetworkImage(imageUrl: snapshot.data!.articles![index].urlToImage.toString(),
-                            fit: BoxFit.cover,
-                            height:height*.28 , width: width*.4,
-                            
-                            placeholder: (context, url) => Container(child: spinkit2,),
-                            errorWidget: (context, url, error) => const Icon(Icons.error,color: Colors.red,),),
-                          ),
-                          //
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Container(
-                                
-                                height: height*.3,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(snapshot.data!.articles![index].title.toString(),
-                                    maxLines: 3,
-                                    style: Theme.of(context).textTheme.bodyMedium,),
-                                    //
-                                        Text(snapshot.data!.articles![index].source!.name.toString(),
-                                   
-                                    style: Theme.of(context).textTheme.bodySmall,),
-                                    
-                                      Text(format.format(dateTime),
-                                    style: Theme.of(context).textTheme.bodySmall,),
-                            
-                                    // Spacer(),
-                                    // SizedBox(height: height*.02,),
-                                    // Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    //   children: [
+
+                        //purpose to show the datail using INKWELL
+                        child: InkWell(
+                          onTap: () {
+                               Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                       NewsDatailScreen(
+                        newsImage: snapshot.data!.articles![index].urlToImage.toString(),
+                         newsTitle: snapshot.data!.articles![index].title.toString(),
+                         date: snapshot.data!.articles![index].publishedAt.toString(), 
+                         author: snapshot.data!.articles![index].author.toString(),
+                          description: snapshot.data!.articles![index].description.toString(), 
+                          content: snapshot.data!.articles![index].content.toString(), 
+                          source: snapshot.data!.articles![index].source!.name.toString()
+                          )));
+                          },
+
+
+                          child: Row(
+                            children: [
+                              ClipRRect(
+                                  
+                              borderRadius: BorderRadius.circular(15),
+                              child: CachedNetworkImage(imageUrl: snapshot.data!.articles![index].urlToImage.toString(),
+                              fit: BoxFit.cover,
+                              height:height*.28 , width: width*.4,
+                              
+                              placeholder: (context, url) => Container(child: spinkit2,),
+                              errorWidget: (context, url, error) => const Icon(Icons.error,color: Colors.red,),),
+                            ),
+                            //
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: SizedBox(
+                                  
+                                  height: height*.3,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(snapshot.data!.articles![index].title.toString(),
+                                      maxLines: 3,
+                                      style: Theme.of(context).textTheme.bodyMedium,),
+                                      //
+                                          Text(snapshot.data!.articles![index].source!.name.toString(),
+                                     
+                                      style: Theme.of(context).textTheme.bodySmall,),
                                       
-                                    //   ],
-                                    // )
-                                  ],
+                                        Text(format.format(dateTime),
+                                      style: Theme.of(context).textTheme.bodySmall,),
+                              
+                                      // Spacer(),
+                                      // SizedBox(height: height*.02,),
+                                      // Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      //   children: [
+                                        
+                                      //   ],
+                                      // )
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ))
-                          ],
-                          
+                              ))
+                            ],
+                            
+                          ),
                         ),
                       );
                
