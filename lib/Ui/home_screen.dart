@@ -16,7 +16,7 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-  enum FilterList {bbcNews, aryNews, independent, reuters, cnn, bloomberg, alJazeera}  //for popup in app bar
+  enum FilterList {bbcNews, aryNews, independent, reuters, cnn, espn, alJazeera, abc, businessinsider}  //for popup in app bar
 
 class _HomeScreenState extends State<HomeScreen> {
 
@@ -63,11 +63,17 @@ class _HomeScreenState extends State<HomeScreen> {
               if(FilterList.alJazeera.name == item.name){
                 name ='al-jazeera-english';
               }
-              if(FilterList.bloomberg.name == item.name){
-                name ='bloomberg';
+              if(FilterList.espn.name == item.name){
+                name ='ESPN';
               }
               if(FilterList.cnn.name == item.name){
                 name ='cnn';
+              }
+              if(FilterList.abc.name == item.name){
+                name ='abc-news';
+              }
+              if(FilterList.businessinsider.name == item.name){
+                name ='business-insider';
               }
               if (kDebugMode) {
                 print('Selected News Source: $name');
@@ -93,13 +99,21 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
                //Al-Jazeera
               const  PopupMenuItem<FilterList>(
-                value: FilterList.bloomberg,
-                child: Text('Bloomberg News') ,  //this is name that showing in popupmenu
+                value: FilterList.espn,
+                child: Text('ESPN News') ,  //this is name that showing in popupmenu
               ),
                //Cnn
              const  PopupMenuItem<FilterList>(
                 value: FilterList.cnn,
                 child: Text('Cnn News') ,  
+              ),
+              const  PopupMenuItem<FilterList>(
+                value: FilterList.abc,
+                child: Text('ABC News') ,  
+              ),
+              const  PopupMenuItem<FilterList>(
+                value: FilterList.businessinsider,
+                child: Text('Business Insider') ,  
               ),
 
             ])
@@ -323,13 +337,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                         Text(format.format(dateTime),
                                       style: Theme.of(context).textTheme.bodySmall,),
                               
-                                      // Spacer(),
-                                      // SizedBox(height: height*.02,),
-                                      // Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      //   children: [
-                                        
-                                      //   ],
-                                      // )
                                     ],
                                   ),
                                 ),

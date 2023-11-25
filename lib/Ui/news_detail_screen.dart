@@ -44,7 +44,7 @@ class _NewsDatailScreenState extends State<NewsDatailScreen> {
             // topLeft: Radius.circular(30), topRight: Radius.circular(30)
             ),
           child: SizedBox(
-            height: height*.4, 
+            height: height*.35, 
             child: CachedNetworkImage(imageUrl: widget.newsImage,
             fit: BoxFit.cover,
             //if image not show then show indicator
@@ -56,7 +56,7 @@ class _NewsDatailScreenState extends State<NewsDatailScreen> {
         
         //
         Container(
-          height: height*.35,
+          height: height*.45,
         //   decoration:const BoxDecoration(
             
         //      borderRadius: BorderRadius.only(
@@ -65,6 +65,7 @@ class _NewsDatailScreenState extends State<NewsDatailScreen> {
         // ),
 
         child: ListView(
+          shrinkWrap: true,
           children: [
             Text(widget.newsTitle, style: Theme.of(context).textTheme.bodyLarge,),
             
@@ -73,9 +74,8 @@ class _NewsDatailScreenState extends State<NewsDatailScreen> {
 
 
             SizedBox(height: height*.02,),
-            Text(widget.description, style: Theme.of(context).textTheme.displaySmall, ),
-            // SizedBox(height: height*.02,),
-            //  Text(widget.content, style: Theme.of(context).textTheme.displaySmall, ),
+            Text(widget.description, style: Theme.of(context).textTheme.displaySmall,maxLines: 22, ),
+           
             
           ],
         ),
