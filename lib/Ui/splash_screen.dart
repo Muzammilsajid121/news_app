@@ -39,11 +39,12 @@ final width = MediaQuery.sizeOf(context).width *1;
         mainAxisAlignment: MainAxisAlignment.center,
       children: [
 
-       Lottie.asset('images/newsani.json', height: height*.4, width: width*.5),
-       Text("News App", style: Theme.of(context).textTheme.titleMedium!.copyWith(fontSize: 40),),
+       Lottie.asset('images/newsani.json', height: height*.3, width: width*.5),
+       Text("News App", style: Theme.of(context).textTheme.titleMedium),
+       Text("By Muzammil", style: Theme.of(context).textTheme.bodyMedium),
 
-       SizedBox(height: height*0.01),
-       const   SpinKitFadingCube(color: Colors.orange , size: 35,),
+       SizedBox(height: height*0.02),
+       const   SpinKitFadingCube(color: Colors.orange , size: 20,),
       
       ],
 
