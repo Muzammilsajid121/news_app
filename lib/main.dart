@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
             //Body Large; choosen by theme
             bodyLarge: GoogleFonts.roboto(fontSize: 19,  fontWeight: FontWeight.w700, color: Colors.black),
             //
-            titleMedium: GoogleFonts.montserrat(fontSize: 28, color: Colors.black , fontWeight: FontWeight.bold),
+            titleMedium: GoogleFonts.montserrat(fontSize: 27, color: Colors.black , fontWeight: FontWeight.bold),
 
         ),
         //
