@@ -44,7 +44,7 @@ final width = MediaQuery.sizeOf(context).width *1;
        Text("By Muzammil", style: Theme.of(context).textTheme.bodyMedium),
 
        SizedBox(height: height*0.02),
-       const   SpinKitFadingCube(color: Colors.orange , size: 20,),
+       const   SpinKitFadingCube(color: Colors.orange , size: 19,),
       
       ],
 
