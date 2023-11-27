@@ -32,16 +32,17 @@ final height = MediaQuery.sizeOf(context).height *1;
 final width = MediaQuery.sizeOf(context).width *1;
 
     return  Scaffold(
-     
+     backgroundColor: Colors.black,
 
 
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
       children: [
 
-       Lottie.asset('images/newsani.json', height: height*.3, width: width*.5),
-       Text("News App", style: Theme.of(context).textTheme.titleMedium),
-       Text("By Muzammil", style: Theme.of(context).textTheme.bodyMedium),
+       Lottie.asset('images/newsani.json', height: height*.25, width: width*.5),
+
+       Text("News App", style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.white)),
+       Text("By Muzammil", style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.white)),
 
        SizedBox(height: height*0.02),
        const   SpinKitFadingCube(color: Colors.orange , size: 19,),
