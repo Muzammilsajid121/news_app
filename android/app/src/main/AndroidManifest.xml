@@ -2,7 +2,7 @@
 
     <!-- Internet permission -->
     <!-- <uses-permission android:name="android.permission.INTERNET" />  -->
-    <!-- comment this for web-->
+    <!-- comment this for web. -->
 
     <application
         android:label="news_app"
