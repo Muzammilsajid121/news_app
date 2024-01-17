@@ -19,10 +19,10 @@ A Flutter-based mobile application that provides the latest news from various ne
 
 <img src="projectphotos/cat5.png" height="600px">                              <img src="projectphotos/listnewschannel.png" height="600px">
 
+# Watch video
 
+[![Watch the video](https://img.youtube.com/vi/6l2BvvSGkRE/0.jpg)](https://youtu.be/6l2BvvSGkRE?si=WuOYbedjkU3EVKZw)
 
-
-[![Watch the video](https://img.youtube.com/vi/A7NDb0iDZd0/0.jpg)](https://youtu.be/A7NDb0iDZd0?si=o-IDEVd6cVlnxUhn)
 
 
 
@@ -32,6 +32,7 @@ Browse through the list of available news channels.
 Select your preferred news channel.
 Explore the latest news headlines.
 
-Acknowledgments
+## Acknowledgments:
 Flutter - UI toolkit for building natively compiled applications for mobile, web, and desktop from a single codebase.
+
 News API - API for fetching news headlines and articles.   https://newsapi.org/docs/get-started
