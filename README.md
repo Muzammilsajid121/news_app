@@ -1,16 +1,34 @@
-# news_app
+# News App         <img src="projectphotos/icon.png" alt="News App Logo" width="40" height="40">
 
-A new Flutter project.
+## Overview
 
-## Getting Started
+A Flutter-based mobile application that provides the latest news from various news channels. Users can choose their preferred news source to stay updated with the latest headlines.
 
-This project is a starting point for a Flutter application.
+## Features
 
-A few resources to get you started if this is your first Flutter project:
+- View top news headlines from different news sources.
+- Select your preferred news channel to customize your news feed.
+- User-friendly interface for easy navigation and news consumption.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Screenshots
+![Screenshot 1](projectphotos/allcurrency.png)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Screenshot 2](projectphotos/conver.png)
+
+![Screenshot 1](projectphotos/conversion.png)
+
+
+
+[![Watch the video](https://img.youtube.com/vi/A7NDb0iDZd0/0.jpg)](https://youtu.be/A7NDb0iDZd0?si=o-IDEVd6cVlnxUhn)
+
+
+
+## Usage
+Launch the app on your emulator or physical device.
+Browse through the list of available news channels.
+Select your preferred news channel.
+Explore the latest news headlines.
+
+Acknowledgments
+Flutter - UI toolkit for building natively compiled applications for mobile, web, and desktop from a single codebase.
+News API - API for fetching news headlines and articles.   https://newsapi.org/docs/get-started
