@@ -11,11 +11,22 @@ A Flutter-based mobile application that provides the latest news from various ne
 - User-friendly interface for easy navigation and news consumption.
 
 ## Screenshots
-![Screenshot 1](projectphotos/allcurrency.png)
+![Screenshot 1](projectphotos/splashscreen.png)
 
-![Screenshot 2](projectphotos/conver.png)
+![Screenshot 2](projectphotos/topscreen.png)
 
-![Screenshot 1](projectphotos/conversion.png)
+![Screenshot 1](projectphotos/cat1.png)
+
+![Screenshot 1](projectphotos/cat2.png)
+
+![Screenshot 1](projectphotos/cat3.png)
+
+![Screenshot 1](projectphotos/cat4.png)
+
+![Screenshot 1](projectphotos/cat5.png)
+
+![Screenshot 1](projectphotos/listnewschannel.png)
+
 
 
 
